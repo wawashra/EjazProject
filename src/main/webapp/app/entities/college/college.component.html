@@ -1,0 +1,81 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="ejazApp.college.home.title">Colleges</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-college" [routerLink]="['/college/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="ejazApp.college.home.createLabel">
+            Create a new College
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="colleges?.length === 0">
+        <span jhiTranslate="ejazApp.college.home.notFound">No colleges found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="colleges?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="ejazApp.college.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="symbol"><span jhiTranslate="ejazApp.college.symbol">Symbol</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="coverImgUrl"><span jhiTranslate="ejazApp.college.coverImgUrl">Cover Img Url</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="universitySymbol"><span jhiTranslate="ejazApp.college.university">University</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let college of colleges ;trackBy: trackId">
+                    <td><a [routerLink]="['/college', college.id, 'view']">{{ college.id }}</a></td>
+                    <td>{{ college.name }}</td>
+                    <td>{{ college.symbol }}</td>
+                    <td>{{ college.coverImgUrl }}</td>
+                    <td>
+                        <div *ngIf="college.universityId">
+                            <a [routerLink]="['/university', college.universityId , 'view']" >{{ college.universitySymbol }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/college', college.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/college', college.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(college)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="colleges?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

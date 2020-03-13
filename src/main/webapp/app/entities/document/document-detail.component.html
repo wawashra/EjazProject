@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="document">
+            <h2><span jhiTranslate="ejazApp.document.detail.title">Document</span> {{ document.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="ejazApp.document.title">Title</span></dt>
+                <dd>
+                    <span>{{ document.title }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.document.active">Active</span></dt>
+                <dd>
+                    <span>{{ document.active }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.document.description">Description</span></dt>
+                <dd>
+                    <span>{{ document.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.document.ratingSum">Rating Sum</span></dt>
+                <dd>
+                    <span>{{ document.ratingSum }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.document.ratingNumber">Rating Number</span></dt>
+                <dd>
+                    <span>{{ document.ratingNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.document.view">View</span></dt>
+                <dd>
+                    <span>{{ document.view }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.document.tags">Tags</span></dt>
+                <dd>
+                    <span *ngFor="let tags of document.tags; let last = last">
+                        <a [routerLink]="['/tag', tags?.id, 'view']">{{ tags.name }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.document.course">Course</span></dt>
+                <dd>
+                    <div *ngIf="document.courseId">
+                        <a [routerLink]="['/course', document.courseId, 'view']">{{ document.courseSymbol }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.document.student">Student</span></dt>
+                <dd>
+                    <div *ngIf="document.studentId">
+                        <a [routerLink]="['/student', document.studentId, 'view']">{{ document.studentName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/document', document.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

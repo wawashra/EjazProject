@@ -1,0 +1,33 @@
+{
+  "health": {
+    "title": "تدقيقات الصحة",
+    "refresh.button": "تحديث",
+    "stacktrace": "تتبع المكدس",
+    "details": {
+      "details": "تفاصيل",
+      "properties": "الخصائص",
+      "name": "اسم",
+      "value": "القيمة",
+      "error": "خطأ"
+    },
+    "indicator": {
+      "discoveryComposite": "Discovery Composite",
+      "refreshScope": "Microservice Refresh Scope",
+      "clientConfigServer": "Microservice Config Server",
+      "hystrix": "Hystrix",
+      "diskSpace": "مساحة القرص",
+      "mail": "البريد الإلكتروني",
+      "ping": "Application",
+      "db": "قاعدة البيانات"
+    },
+    "table": {
+      "service": "اسم الخدمة",
+      "status": "الحالة"
+    },
+    "status": {
+      "UNKNOWN": "UNKNOWN",
+      "UP": "تشتغل",
+      "DOWN": "عاطلة"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-attachment-heading" jhiTranslate="ejazApp.attachment.home.createOrEditLabel">Create or edit a Attachment</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ejazApp.attachment.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ejazApp.attachment.url" for="field_url">Url</label>
+                    <input type="text" class="form-control" name="url" id="field_url"
+                           formControlName="url"/>
+                    <div *ngIf="editForm.get('url')!.invalid && (editForm.get('url')!.dirty || editForm.get('url')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('url')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ejazApp.attachment.extension" for="field_extension">Extension</label>
+                    <input type="text" class="form-control" name="extension" id="field_extension"
+                           formControlName="extension"/>
+                    <div *ngIf="editForm.get('extension')!.invalid && (editForm.get('extension')!.dirty || editForm.get('extension')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('extension')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ejazApp.attachment.fileSize" for="field_fileSize">File Size</label>
+                    <input type="text" class="form-control" name="fileSize" id="field_fileSize"
+                           formControlName="fileSize"/>
+                    <div *ngIf="editForm.get('fileSize')!.invalid && (editForm.get('fileSize')!.dirty || editForm.get('fileSize')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('fileSize')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ejazApp.attachment.hits" for="field_hits">Hits</label>
+                    <input type="number" class="form-control" name="hits" id="field_hits"
+                           formControlName="hits"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ejazApp.attachment.document" for="field_document">Document</label>
+                    <select class="form-control" id="field_document" name="document" formControlName="documentId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="documentOption.id" *ngFor="let documentOption of documents; trackBy: trackById">{{ documentOption.title }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ejazApp.attachment.attachmentType" for="field_attachmentType">Attachment Type</label>
+                    <select class="form-control" id="field_attachmentType" name="attachmentType" formControlName="attachmentTypeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="attachmentTypeOption.id" *ngFor="let attachmentTypeOption of attachmenttypes; trackBy: trackById">{{ attachmentTypeOption.type }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

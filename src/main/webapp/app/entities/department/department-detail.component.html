@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="department">
+            <h2><span jhiTranslate="ejazApp.department.detail.title">Department</span> {{ department.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="ejazApp.department.name">Name</span></dt>
+                <dd>
+                    <span>{{ department.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.department.symbol">Symbol</span></dt>
+                <dd>
+                    <span>{{ department.symbol }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.department.coverImgUrl">Cover Img Url</span></dt>
+                <dd>
+                    <span>{{ department.coverImgUrl }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.department.college">College</span></dt>
+                <dd>
+                    <div *ngIf="department.collegeId">
+                        <a [routerLink]="['/college', department.collegeId, 'view']">{{ department.collegeSymbol }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/department', department.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

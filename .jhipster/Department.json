@@ -1,0 +1,51 @@
+{
+    "name": "Department",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "symbol",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "coverImgUrl",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "course",
+            "otherEntityRelationshipName": "department",
+            "relationshipValidateRules": "required",
+            "relationshipName": "course"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "college",
+            "otherEntityRelationshipName": "department",
+            "relationshipName": "college",
+            "otherEntityField": "symbol"
+        }
+    ],
+    "changelogDate": "20200310220600",
+    "entityTableName": "department",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

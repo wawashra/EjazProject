@@ -1,0 +1,105 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="ejazApp.student.home.title">Students</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-student" [routerLink]="['/student/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="ejazApp.student.home.createLabel">
+            Create a new Student
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="students?.length === 0">
+        <span jhiTranslate="ejazApp.student.home.notFound">No students found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="students?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="ejazApp.student.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="birthday"><span jhiTranslate="ejazApp.student.birthday">Birthday</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="phoneNumber"><span jhiTranslate="ejazApp.student.phoneNumber">Phone Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="gender"><span jhiTranslate="ejazApp.student.gender">Gender</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="profileImgUrl"><span jhiTranslate="ejazApp.student.profileImgUrl">Profile Img Url</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="coverImgUrl"><span jhiTranslate="ejazApp.student.coverImgUrl">Cover Img Url</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="star"><span jhiTranslate="ejazApp.student.star">Star</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userId"><span jhiTranslate="ejazApp.student.user">User</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="universityName"><span jhiTranslate="ejazApp.student.university">University</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="departmentName"><span jhiTranslate="ejazApp.student.department">Department</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="collegeName"><span jhiTranslate="ejazApp.student.college">College</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of students ;trackBy: trackId">
+                    <td><a [routerLink]="['/student', student.id, 'view']">{{ student.id }}</a></td>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.birthday | date:'mediumDate' }}</td>
+                    <td>{{ student.phoneNumber }}</td>
+                    <td jhiTranslate="{{ 'ejazApp.Gender.' + student.gender }}">{{ student.gender }}</td>
+                    <td>{{ student.profileImgUrl }}</td>
+                    <td>{{ student.coverImgUrl }}</td>
+                    <td>{{ student.star }}</td>
+                    <td>
+                        {{ student.userId }}
+                    </td>
+                    <td>
+                        <div *ngIf="student.universityId">
+                            <a [routerLink]="['/university', student.universityId , 'view']" >{{ student.universityName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="student.departmentId">
+                            <a [routerLink]="['/department', student.departmentId , 'view']" >{{ student.departmentName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="student.collegeId">
+                            <a [routerLink]="['/college', student.collegeId , 'view']" >{{ student.collegeName }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/student', student.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/student', student.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(student)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="students?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

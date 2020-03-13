@@ -1,0 +1,71 @@
+/* ==========================================================================
+Main page styles
+========================================================================== */
+
+/* wait autoprefixer update to allow simple generation of high pixel density media query */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (-moz-min-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+}
+
+/*
+    DEMO STYLE
+*/
+
+button {
+  font-family: 'Tajawal', sans-serif !important;
+}
+a,
+a:hover,
+a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: 'Tajawal', sans-serif !important;
+  text-decoration: none;
+}
+.btn-info {
+  background-color: #5390f3;
+  border: 0px;
+}
+.btn-info:hover {
+  background-color: #346cc7;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed #ddd;
+  margin: 40px 0;
+}
+.addnew {
+  font-size: 12px !important;
+  font-weight: 400;
+  margin-right: 20px;
+  color: green;
+}
+.bg-bluez {
+  background: #3875d8;
+}
+.bg-laptop {
+  background: #141414 url(../../content/images/laptop-bg-dark.jpg) center center;
+  background-size: cover;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+  #sidebar {
+    margin-right: -250px;
+  }
+  #sidebar.active {
+    margin-right: 0;
+  }
+  #sidebarCollapse span {
+    display: none;
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "ejazApp": {
+    "student": {
+      "home": {
+        "title": "Students",
+        "createLabel": "Create a new Student",
+        "createOrEditLabel": "Create or edit a Student",
+        "notFound": "No Students found"
+      },
+      "created": "A new Student is created with identifier {{ param }}",
+      "updated": "A Student is updated with identifier {{ param }}",
+      "deleted": "A Student is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Student {{ id }}?"
+      },
+      "detail": {
+        "title": "Student"
+      },
+      "name": "Name",
+      "birthday": "Birthday",
+      "phoneNumber": "Phone Number",
+      "gender": "Gender",
+      "profileImgUrl": "Profile Img Url",
+      "coverImgUrl": "Cover Img Url",
+      "star": "Star",
+      "user": "User",
+      "university": "University",
+      "department": "Department",
+      "college": "College",
+      "documents": "Documents",
+      "report": "Report",
+      "courses": "Courses"
+    }
+  }
+}

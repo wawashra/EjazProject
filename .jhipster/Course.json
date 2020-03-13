@@ -1,0 +1,63 @@
+{
+    "name": "Course",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "symbol",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "coverImgUrl",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "document",
+            "otherEntityRelationshipName": "course",
+            "relationshipValidateRules": "required",
+            "relationshipName": "document"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "department",
+            "otherEntityRelationshipName": "course",
+            "relationshipName": "department",
+            "otherEntityField": "symbol"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "student",
+            "otherEntityRelationshipName": "courses",
+            "relationshipName": "students",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200310220700",
+    "entityTableName": "course",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

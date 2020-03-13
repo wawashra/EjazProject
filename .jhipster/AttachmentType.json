@@ -1,0 +1,32 @@
+{
+    "name": "AttachmentType",
+    "fields": [
+        {
+            "fieldName": "type",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "attachment",
+            "otherEntityRelationshipName": "attachmentType",
+            "relationshipValidateRules": "required",
+            "relationshipName": "attachment"
+        }
+    ],
+    "changelogDate": "20200310220900",
+    "entityTableName": "attachment_type",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

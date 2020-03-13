@@ -1,0 +1,23 @@
+{
+  "ejazApp": {
+    "attachmentType": {
+      "home": {
+        "title": "Attachment Types",
+        "createLabel": "Create a new Attachment Type",
+        "createOrEditLabel": "Create or edit a Attachment Type",
+        "notFound": "No Attachment Types found"
+      },
+      "created": "A new Attachment Type is created with identifier {{ param }}",
+      "updated": "A Attachment Type is updated with identifier {{ param }}",
+      "deleted": "A Attachment Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Attachment Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Attachment Type"
+      },
+      "type": "Type",
+      "attachment": "Attachment"
+    }
+  }
+}

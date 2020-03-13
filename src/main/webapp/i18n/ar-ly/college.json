@@ -1,0 +1,26 @@
+{
+  "ejazApp": {
+    "college": {
+      "home": {
+        "title": "Colleges",
+        "createLabel": "Create a new College",
+        "createOrEditLabel": "Create or edit a College",
+        "notFound": "No Colleges found"
+      },
+      "created": "A new College is created with identifier {{ param }}",
+      "updated": "A College is updated with identifier {{ param }}",
+      "deleted": "A College is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete College {{ id }}?"
+      },
+      "detail": {
+        "title": "College"
+      },
+      "name": "Name",
+      "symbol": "Symbol",
+      "coverImgUrl": "Cover Img Url",
+      "department": "Department",
+      "university": "University"
+    }
+  }
+}

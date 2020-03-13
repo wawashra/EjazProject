@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="report">
+            <h2><span jhiTranslate="ejazApp.report.detail.title">Report</span> {{ report.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="ejazApp.report.message">Message</span></dt>
+                <dd>
+                    <span>{{ report.message }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.report.document">Document</span></dt>
+                <dd>
+                    <div *ngIf="report.documentId">
+                        <a [routerLink]="['/document', report.documentId, 'view']">{{ report.documentTitle }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.report.student">Student</span></dt>
+                <dd>
+                    <div *ngIf="report.studentId">
+                        <a [routerLink]="['/student', report.studentId, 'view']">{{ report.studentName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/report', report.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

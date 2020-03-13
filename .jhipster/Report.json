@@ -1,0 +1,39 @@
+{
+    "name": "Report",
+    "fields": [
+        {
+            "fieldName": "message",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "document",
+            "otherEntityRelationshipName": "report",
+            "relationshipName": "document",
+            "otherEntityField": "title"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "student",
+            "otherEntityRelationshipName": "report",
+            "relationshipName": "student",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200310221200",
+    "entityTableName": "report",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

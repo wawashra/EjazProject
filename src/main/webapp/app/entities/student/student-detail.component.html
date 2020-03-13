@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="student">
+            <h2><span jhiTranslate="ejazApp.student.detail.title">Student</span> {{ student.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="ejazApp.student.name">Name</span></dt>
+                <dd>
+                    <span>{{ student.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.student.birthday">Birthday</span></dt>
+                <dd>
+                    <span>{{ student.birthday }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.student.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{ student.phoneNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.student.gender">Gender</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'ejazApp.Gender.' + student.gender }}">{{ student.gender }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.student.profileImgUrl">Profile Img Url</span></dt>
+                <dd>
+                    <span>{{ student.profileImgUrl }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.student.coverImgUrl">Cover Img Url</span></dt>
+                <dd>
+                    <span>{{ student.coverImgUrl }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.student.star">Star</span></dt>
+                <dd>
+                    <span>{{ student.star }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.student.user">User</span></dt>
+                <dd>
+                    {{ student.userId }}
+                </dd>
+                <dt><span jhiTranslate="ejazApp.student.university">University</span></dt>
+                <dd>
+                    <div *ngIf="student.universityId">
+                        <a [routerLink]="['/university', student.universityId, 'view']">{{ student.universityName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.student.department">Department</span></dt>
+                <dd>
+                    <div *ngIf="student.departmentId">
+                        <a [routerLink]="['/department', student.departmentId, 'view']">{{ student.departmentName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.student.college">College</span></dt>
+                <dd>
+                    <div *ngIf="student.collegeId">
+                        <a [routerLink]="['/college', student.collegeId, 'view']">{{ student.collegeName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.student.courses">Courses</span></dt>
+                <dd>
+                    <span *ngFor="let courses of student.courses; let last = last">
+                        <a [routerLink]="['/course', courses?.id, 'view']">{{ courses.name }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/student', student.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Document.
+    -->
+    <changeSet id="20200310220800-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="document_id"
+                                 baseTableName="document_tags"
+                                 constraintName="fk_document_tags_document_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+
+        <addForeignKeyConstraint baseColumnNames="tags_id"
+                                 baseTableName="document_tags"
+                                 constraintName="fk_document_tags_tags_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"/>
+        
+        <addForeignKeyConstraint baseColumnNames="course_id"
+                                 baseTableName="document"
+                                 constraintName="fk_document_course_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course"/>
+
+        <addForeignKeyConstraint baseColumnNames="student_id"
+                                 baseTableName="document"
+                                 constraintName="fk_document_student_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="student"/>
+
+    </changeSet>
+</databaseChangeLog>

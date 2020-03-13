@@ -1,0 +1,97 @@
+entity University {
+	name String required,
+    symbol String required unique
+}
+
+entity College {
+	name String required,
+    symbol String required unique,
+    coverImgUrl String
+}
+
+entity Department {
+	name String required,
+    symbol String required unique,
+    coverImgUrl String
+}
+
+entity Course {
+	name String required,
+    symbol String required unique,
+	description String,
+    coverImgUrl String
+}
+
+entity Document {
+    title String required,
+    active Boolean,
+	description String,
+    ratingSum Integer,
+    ratingNumber Integer,
+    view Integer
+}
+
+entity AttachmentType {
+    //EXAM, NOTE, BOOK, SLIDE, QUIZ, HOMEWORK, ASSIGNMENT, SOLUTION, ETC
+	type String required,
+}
+
+entity Attachment {
+    name String required,
+	url String required,
+    extension String required,
+    fileSize String required,
+    hits Integer,
+}
+
+entity Tag {
+    name String required
+}
+
+entity Report {
+    message String required
+}
+enum Gender {
+	MALE, FEMALE
+}
+entity Student {
+	name String required,
+    birthday LocalDate required ,
+	phoneNumber String required,
+    gender Gender required
+    profileImgUrl String,
+    coverImgUrl String,
+    star Boolean,
+}
+
+relationship OneToMany {
+    University{college(symbol) required} to College{university(symbol)},
+    College {department(symbol) required} to Department{college(symbol)},
+    Department {course(symbol) required} to Course{department(symbol)},
+    Course {document(title) required} to Document{course(symbol)},
+ 	Document{attachment(name) required} to Attachment{document(title)},
+    AttachmentType{attachment(name) required} to Attachment{attachmentType(type)}
+    Document{report} to Report{document(title)},
+    Student {documents(title)} to Document{student(name)},
+    Student {report} to Report{student(name)}
+}
+
+relationship ManyToMany {
+	Document{tags(name)} to Tag{documents(title)},
+    Student{courses(name)} to Course{students}
+}
+
+relationship OneToOne {
+    Student{user} to User,
+    Student{university(name)} to University,
+    Student{department(name)} to Department,
+    Student{college(name)} to College
+}
+// set 
+filter all
+// Set pagination options
+paginate * with pagination
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+// Set service options to all except few
+service all with serviceImpl

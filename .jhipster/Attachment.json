@@ -1,0 +1,64 @@
+{
+    "name": "Attachment",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "url",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "extension",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fileSize",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "hits",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "document",
+            "otherEntityRelationshipName": "attachment",
+            "relationshipName": "document",
+            "otherEntityField": "title"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "attachmentType",
+            "otherEntityRelationshipName": "attachment",
+            "relationshipName": "attachmentType",
+            "otherEntityField": "type"
+        }
+    ],
+    "changelogDate": "20200310221000",
+    "entityTableName": "attachment",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

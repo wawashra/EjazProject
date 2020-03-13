@@ -1,0 +1,55 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.ejazbzu",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "6.7.1",
+    "applicationType": "monolith",
+    "baseName": "ejaz",
+    "packageName": "com.ejazbzu",
+    "packageFolder": "com/ejazbzu",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "M2VkMTc2ZWQ4MWU3ZTc4OTkyNzY3ZjU0NWNiYjJjNDk4N2MwOTA2NDYwNTQwMmI0NzYzM2Y5ZDJiYTZmNzJiZTU4YzRhOGU0ODIzN2NlZThhNDhjZGZmODg5NzAwMjJhN2NjOTAxNDlhNTk5Y2VmM2U4MWVjMjE0OWM4ZmM1MTM=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1582065345021,
+    "testFrameworks": ["gatling"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-audit-helper",
+        "version": "1.0.3"
+      },
+      {
+        "name": "generator-jhipster-social-login-api",
+        "version": "0.0.1"
+      }
+    ],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": ["en", "ar-ly"],
+    "blueprints": []
+  },
+  "generator-jhipster-entity-audit": {
+    "auditFramework": "custom"
+  }
+}

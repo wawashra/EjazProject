@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="attachment">
+            <h2><span jhiTranslate="ejazApp.attachment.detail.title">Attachment</span> {{ attachment.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="ejazApp.attachment.name">Name</span></dt>
+                <dd>
+                    <span>{{ attachment.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.attachment.url">Url</span></dt>
+                <dd>
+                    <span>{{ attachment.url }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.attachment.extension">Extension</span></dt>
+                <dd>
+                    <span>{{ attachment.extension }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.attachment.fileSize">File Size</span></dt>
+                <dd>
+                    <span>{{ attachment.fileSize }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.attachment.hits">Hits</span></dt>
+                <dd>
+                    <span>{{ attachment.hits }}</span>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.attachment.document">Document</span></dt>
+                <dd>
+                    <div *ngIf="attachment.documentId">
+                        <a [routerLink]="['/document', attachment.documentId, 'view']">{{ attachment.documentTitle }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="ejazApp.attachment.attachmentType">Attachment Type</span></dt>
+                <dd>
+                    <div *ngIf="attachment.attachmentTypeId">
+                        <a [routerLink]="['/attachment-type', attachment.attachmentTypeId, 'view']">{{ attachment.attachmentTypeType }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/attachment', attachment.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

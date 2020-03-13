@@ -1,0 +1,80 @@
+{
+    "name": "Document",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "active",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ratingSum",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "ratingNumber",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "view",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "attachment",
+            "otherEntityRelationshipName": "document",
+            "relationshipValidateRules": "required",
+            "relationshipName": "attachment"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "report",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "report"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "tag",
+            "otherEntityRelationshipName": "documents",
+            "relationshipName": "tags",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "course",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "course",
+            "otherEntityField": "symbol"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "student",
+            "otherEntityRelationshipName": "documents",
+            "relationshipName": "student",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20200310220800",
+    "entityTableName": "document",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}

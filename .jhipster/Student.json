@@ -1,0 +1,111 @@
+{
+    "name": "Student",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "birthday",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "gender",
+            "fieldType": "Gender",
+            "fieldValues": "MALE,FEMALE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "profileImgUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "coverImgUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "star",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "student",
+            "relationshipName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "university",
+            "otherEntityRelationshipName": "student",
+            "relationshipName": "university",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "department",
+            "otherEntityRelationshipName": "student",
+            "relationshipName": "department",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "college",
+            "otherEntityRelationshipName": "student",
+            "relationshipName": "college",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "document",
+            "otherEntityRelationshipName": "student",
+            "relationshipName": "documents"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "report",
+            "otherEntityRelationshipName": "student",
+            "relationshipName": "report"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "course",
+            "otherEntityRelationshipName": "students",
+            "relationshipName": "courses",
+            "otherEntityField": "name",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200310221300",
+    "entityTableName": "student",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
+}
