@@ -17,7 +17,7 @@ import { IUser } from 'app/core/user/user.model';
 })
 export class MainComponent implements OnInit {
   private renderer: Renderer2;
-  private isExpanded = false;
+  isExpanded = false;
   account: Account | null = null;
   user: IUser | null = null;
   courses: ICourse[] | null = null;
@@ -86,7 +86,7 @@ export class MainComponent implements OnInit {
     return title;
   }
 
-  private onClick(): void {
+  onClick(): void {
     this.isExpanded = !this.isExpanded;
   }
 
