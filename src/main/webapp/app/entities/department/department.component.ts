@@ -10,7 +10,6 @@ import { IDepartment } from 'app/shared/model/department.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { DepartmentService } from './department.service';
 import { DepartmentDeleteDialogComponent } from './department-delete-dialog.component';
-
 @Component({
   selector: 'jhi-department',
   templateUrl: './department.component.html'
@@ -24,6 +23,13 @@ export class DepartmentComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  collageId:any;
+  filter= {
+    collageId: null,
+    departmentName: ''
+  };
+  departmentName = '';
+
 
   constructor(
     protected departmentService: DepartmentService,
@@ -35,20 +41,26 @@ export class DepartmentComponent implements OnInit, OnDestroy {
 
   loadPage(page?: number): void {
     const pageToLoad: number = page || this.page;
+      this.departmentService
+        .query(this.filter,{
+          page: pageToLoad - 1,
+          size: this.itemsPerPage,
+          sort: this.sort(),
+        })
+        .subscribe(
+          (res: HttpResponse<IDepartment[]>) => this.onSuccess(res.body, res.headers, pageToLoad),
+          () => this.onError()
+        );
+  }
 
-    this.departmentService
-      .query({
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort()
-      })
-      .subscribe(
-        (res: HttpResponse<IDepartment[]>) => this.onSuccess(res.body, res.headers, pageToLoad),
-        () => this.onError()
-      );
+  applyFilter() :void {
+    console.error("mjj");
+    this.filter.departmentName = this.departmentName;
+    this.loadPage();
   }
 
   ngOnInit(): void {
+    this.filter.collageId = this.activatedRoute.snapshot.queryParamMap.get('collageId');
     this.activatedRoute.data.subscribe(data => {
       this.page = data.pagingParams.page;
       this.ascending = data.pagingParams.ascending;

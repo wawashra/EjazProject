@@ -32,7 +32,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let college of colleges ;trackBy: trackId">
-                    <td><a [routerLink]="['/college', college.id, 'view']">{{ college.id }}</a></td>
+                    <td><a [routerLink]="['/department']" [queryParams]="{collageId: college.id}">{{ college.id }}</a></td>
                     <td>{{ college.name }}</td>
                     <td>{{ college.symbol }}</td>
                     <td>{{ college.coverImgUrl }}</td>

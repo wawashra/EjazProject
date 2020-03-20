@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.JoinType;
 
+import com.ejazbzu.service.dto.DepartmentFilterDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -61,9 +62,20 @@ public class DepartmentQueryService extends QueryService<Department> {
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
-    public Page<DepartmentDTO> findByCriteria(DepartmentCriteria criteria, Pageable page) {
-        log.debug("find by criteria : {}, page: {}", criteria, page);
-        final Specification<Department> specification = createSpecification(criteria);
+    public Page<DepartmentDTO> findByCriteria(DepartmentFilterDTO filter, Pageable page) {
+        log.debug("find by filter : {}, page: {}", filter, page);
+        Specification<Department> specification = Specification.where(null);
+        if (filter.getCollageId() != null) {
+            specification = ((Specification<Department>) specification).and((root, query, cb) -> {
+                return cb.equal(root.get(Department_.college).get(College_.id),filter.getCollageId());
+            });
+        }
+
+        if (filter.getDepartmentName() != null){
+            specification = ((Specification<Department>) specification).and((root, query, cb) -> {
+                return  cb.like(root.get(Department_.name),"%" + filter.getDepartmentName() + "%");
+            });
+        }
         return departmentRepository.findAll(specification, page)
             .map(departmentMapper::toDto);
     }

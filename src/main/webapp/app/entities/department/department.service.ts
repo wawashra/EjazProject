@@ -27,9 +27,9 @@ export class DepartmentService {
     return this.http.get<IDepartment>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  query(req?: any): Observable<EntityArrayResponseType> {
+  query(filter: any, req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<IDepartment[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.post<IDepartment[]>(this.resourceUrl+'/all', filter,{ params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

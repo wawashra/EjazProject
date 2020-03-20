@@ -1,6 +1,7 @@
 package com.ejazbzu.web.rest;
 
 import com.ejazbzu.service.DepartmentService;
+import com.ejazbzu.service.dto.DepartmentFilterDTO;
 import com.ejazbzu.web.rest.errors.BadRequestAlertException;
 import com.ejazbzu.service.dto.DepartmentDTO;
 import com.ejazbzu.service.dto.DepartmentCriteria;
@@ -96,10 +97,10 @@ public class DepartmentResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of departments in body.
      */
-    @GetMapping("/departments")
-    public ResponseEntity<List<DepartmentDTO>> getAllDepartments(DepartmentCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get Departments by criteria: {}", criteria);
-        Page<DepartmentDTO> page = departmentQueryService.findByCriteria(criteria, pageable);
+    @PostMapping("/departments/all")
+    public ResponseEntity<List<DepartmentDTO>> getAllDepartments(@RequestBody DepartmentFilterDTO filter, Pageable pageable) {
+        log.debug("REST request to get Departments by filter: {}", filter);
+        Page<DepartmentDTO> page = departmentQueryService.findByCriteria(filter, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

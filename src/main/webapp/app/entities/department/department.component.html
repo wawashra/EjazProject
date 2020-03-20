@@ -8,6 +8,7 @@
             Create a new Department
             </span>
         </button>
+        <input [(ngModel)]="departmentName" (keyup)="applyFilter()">
     </h2>
 
     <jhi-alert-error></jhi-alert-error>
