@@ -9,6 +9,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { LoginService } from 'app/core/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { LayoutService } from '../layout.service';
 
 @Component({
   selector: 'jhi-navbar',
@@ -21,7 +22,9 @@ export class NavbarComponent implements OnInit {
   languages = LANGUAGES;
   swaggerEnabled?: boolean;
   version: string;
-
+  ejazLogo = '../../../content/images/ejaz-logo.png';
+  sideBarOpen?: boolean;
+  sideBarText = 'اخفاء القائمة الجانبية';
   constructor(
     private loginService: LoginService,
     private languageService: JhiLanguageService,
@@ -29,16 +32,24 @@ export class NavbarComponent implements OnInit {
     private accountService: AccountService,
     private loginModalService: LoginModalService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private layoutService: LayoutService
   ) {
     this.version = VERSION ? (VERSION.toLowerCase().startsWith('v') ? VERSION : 'v' + VERSION) : '';
   }
 
   ngOnInit(): void {
+    this.sideBarOpen = true;
     this.profileService.getProfileInfo().subscribe(profileInfo => {
       this.inProduction = profileInfo.inProduction;
       this.swaggerEnabled = profileInfo.swaggerEnabled;
     });
+  }
+
+  toggleSideBar(): any {
+    this.sideBarOpen = !this.sideBarOpen;
+    this.sideBarOpen ? (this.sideBarText = 'اخفاء القائمة الجانبية') : (this.sideBarText = 'إظهار القائمة الجانبية');
+    this.layoutService.changeExpanded(this.sideBarOpen);
   }
 
   changeLanguage(languageKey: string): void {

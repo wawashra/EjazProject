@@ -9,6 +9,7 @@ import { Account } from 'app/core/user/account.model';
 import { CourseService } from 'app/entities/course/course.service';
 import { UserService } from 'app/core/user/user.service';
 import { IUser } from 'app/core/user/user.model';
+import { LayoutService } from '../layout.service';
 
 @Component({
   selector: 'jhi-main',
@@ -17,6 +18,7 @@ import { IUser } from 'app/core/user/user.model';
 })
 export class MainComponent implements OnInit {
   private renderer: Renderer2;
+  sideBarOpen = true;
   isExpanded = false;
   account: Account | null = null;
   user: IUser | null = null;
@@ -29,12 +31,16 @@ export class MainComponent implements OnInit {
     private router: Router,
     private findLanguageFromKeyPipe: FindLanguageFromKeyPipe,
     private translateService: TranslateService,
-    rootRenderer: RendererFactory2
+    rootRenderer: RendererFactory2,
+    private layoutService: LayoutService
   ) {
     this.renderer = rootRenderer.createRenderer(document.querySelector('html'), null);
   }
 
   ngOnInit(): void {
+    this.layoutService.isExpanded.subscribe(boolValue => {
+      this.sideBarOpen = boolValue;
+    });
     this.accountService.getAuthenticationState().subscribe(account => {
       this.account = account;
       if (account) {

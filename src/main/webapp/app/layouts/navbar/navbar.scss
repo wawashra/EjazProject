@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
-
+@import 'https://fonts.googleapis.com/css?family=Tajawal:500,700&display=swap&subset=arabic';
 /* ==========================================================================
 Navbar
 ========================================================================== */
@@ -34,9 +34,34 @@ Logo styles
 ========================================================================== */
 .logo-img {
   height: 45px;
-  width: 45px;
+  width: 75px;
   display: inline-block;
   vertical-align: middle;
-  background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+  background: url('../../../content/images/ejaz-logo.png') no-repeat center center;
   background-size: contain;
+}
+
+.navbar-new {
+  /*padding: 15px 10px;*/
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+span {
+  color: #1870fc;
+}
+fa-icon {
+  color: black;
+}
+
+span,
+span:hover,
+span:focus {
+  color: #1870fc;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: 'Tajawal', sans-serif !important;
+  text-decoration: none;
 }

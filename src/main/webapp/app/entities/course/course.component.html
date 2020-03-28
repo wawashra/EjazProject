@@ -17,7 +17,20 @@
     <div class="alert alert-warning" id="no-result" *ngIf="courses?.length === 0">
         <span jhiTranslate="ejazApp.course.home.notFound">No courses found</span>
     </div>
-
+    <mat-form-field class="example-full-width" dir="rtl">
+        <input type="text"
+               placeholder="إبحث عن"
+               aria-label="Number"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    
     <div class="table-responsive" id="entities" *ngIf="courses?.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>

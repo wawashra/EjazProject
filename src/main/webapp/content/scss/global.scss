@@ -2,9 +2,10 @@
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
-@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
-@import "~@fortawesome/fontawesome-free/scss/solid.scss";
-@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
@@ -209,3 +210,13 @@ p {
   direction: rtl;
 }
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+jhi-main {
+  display: flex;
+  flex-grow: 1;
+}
