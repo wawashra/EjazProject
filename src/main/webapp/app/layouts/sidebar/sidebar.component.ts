@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
   logoFooter = '../../../content/images/ejaz-logo.png';
+  profile = '../../../content/images/was.jpg';
 
   constructor() {}
 

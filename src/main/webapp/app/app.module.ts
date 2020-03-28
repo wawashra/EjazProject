@@ -15,7 +15,6 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
-import { SearchComponent } from './layouts/search/search.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -27,15 +26,7 @@ import { SearchComponent } from './layouts/search/search.component';
     EjazAppRoutingModule,
     BrowserAnimationsModule
   ],
-  declarations: [
-    MainComponent,
-    NavbarComponent,
-    ErrorComponent,
-    PageRibbonComponent,
-    ActiveMenuDirective,
-    SidebarComponent,
-    SearchComponent
-  ],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, SidebarComponent],
   bootstrap: [MainComponent]
 })
 export class EjazAppModule {}

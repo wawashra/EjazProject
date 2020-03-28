@@ -47,8 +47,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import { RouterModule } from '@angular/router';
 @NgModule({
   exports: [
+    RouterModule,
     FormsModule,
     CommonModule,
     NgbModule,
