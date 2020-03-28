@@ -1,15 +1,20 @@
 <form style="display: flex;flex-direction: row;">
 
-        <div class="input-group" dir="rtl">
-            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" style="border-radius: 0 5px 5px 0;" placeholder="State" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl">
-            <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
-                    <span>{{state.name}}</span> |
-                    <small>{{state.symbol}}</small>
-                </mat-option>
-            </mat-autocomplete>
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon3" style="border-radius: 5px 0 0 5px;"><i class="fas fa-search"></i></span>
-            </div>
+    <div class="input-group" dir="rtl">
+        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+            style="border-radius: 0 5px 5px 0;" placeholder="State" aria-label="State" [matAutocomplete]="auto"
+            [formControl]="stateCtrl">
+
+            
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let state of states" [value]="state.name">
+                <span>{{state.name}}</span> |
+                <small>{{state.symbol}}</small>
+            </mat-option>
+        </mat-autocomplete>
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon3" style="border-radius: 5px 0 0 5px;"><i
+                    class="fas fa-search"></i></span>
         </div>
+    </div>
 </form>
