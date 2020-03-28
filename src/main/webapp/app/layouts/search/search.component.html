@@ -7,7 +7,7 @@
 
             
         <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let state of states" [value]="state.name">
+            <mat-option *ngFor="let state of states" [value]="state.name" routerLink="/course/{{state.id}}/view">
                 <span>{{state.name}}</span> |
                 <small>{{state.symbol}}</small>
             </mat-option>
