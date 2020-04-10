@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -13,6 +12,7 @@ import { ICourse } from 'app/shared/model/course.model';
 import { CourseService } from 'app/entities/course/course.service';
 import { IStudent } from 'app/shared/model/student.model';
 import { StudentService } from 'app/entities/student/student.service';
+import { IAttachment } from 'app/shared/model/attachment.model';
 
 type SelectableEntity = ITag | ICourse | IStudent;
 
@@ -26,6 +26,9 @@ export class DocumentUpdateComponent implements OnInit {
   courses: ICourse[] = [];
   students: IStudent[] = [];
 
+  Attachments: IAttachmentِ[] = [];
+
+  courseId?: string;
   editForm = this.fb.group({
     id: [],
     title: [null, [Validators.required]],
@@ -49,12 +52,17 @@ export class DocumentUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.courseId = this.activatedRoute.snapshot.paramMap.get('cid') || '';
+
     this.activatedRoute.data.subscribe(({ document }) => {
       this.updateForm(document);
-
+      const fil = {};
+      if (this.courseId) {
+        fil['id.equals'] = this.courseId;
+      }
       this.tagService.query().subscribe((res: HttpResponse<ITag[]>) => (this.tags = res.body || []));
 
-      this.courseService.query().subscribe((res: HttpResponse<ICourse[]>) => (this.courses = res.body || []));
+      this.courseService.query(fil).subscribe((res: HttpResponse<ICourse[]>) => (this.courses = res.body || []));
 
       this.studentService.query().subscribe((res: HttpResponse<IStudent[]>) => (this.students = res.body || []));
     });
@@ -82,6 +90,7 @@ export class DocumentUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const document = this.createFromForm();
+
     if (document.id !== undefined) {
       this.subscribeToSaveResponse(this.documentService.update(document));
     } else {

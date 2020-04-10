@@ -3,9 +3,9 @@
     "document": {
       "home": {
         "title": "Documents",
-        "createLabel": "Create a new Document",
-        "createOrEditLabel": "Create or edit a Document",
-        "notFound": "No Documents found"
+        "createLabel": "إضافة Document جديد",
+        "createOrEditLabel": "إضافة او تعديل Document",
+        "notFound": " غير موجود Document"
       },
       "created": "A new Document is created with identifier {{ param }}",
       "updated": "A Document is updated with identifier {{ param }}",
@@ -16,13 +16,13 @@
       "detail": {
         "title": "Document"
       },
-      "title": "Title",
+      "title": "العنوان",
       "active": "Active",
-      "description": "Description",
+      "description": "الوصف",
       "ratingSum": "Rating Sum",
       "ratingNumber": "Rating Number",
       "view": "View",
-      "attachment": "Attachment",
+      "attachment": "المرفقات",
       "report": "Report",
       "tags": "Tags",
       "course": "Course",
