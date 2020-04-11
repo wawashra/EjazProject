@@ -14,16 +14,7 @@ import { DocumentUpdateComponent } from 'app/entities/document/document-update.c
 import { UploadTaskComponent } from 'app/entities/upload-task/upload-task.component';
 import { UploaderComponent } from 'app/entities/uploader/uploader.component';
 import { DropzoneDirective } from 'app/dropzone.directive';
-const config = {
-  apiKey: '',
-  authDomain: '',
-  databaseURL: '',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: '',
-  appId: '',
-  measurementId: ''
-};
+const config = {};
 @NgModule({
   imports: [
     EjazSharedLibsModule,

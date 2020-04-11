@@ -6,15 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./uploader.component.scss']
 })
 export class UploaderComponent {
-  isHovering: boolean;
+  isHovering?: boolean;
 
-  files?: File[] = [];
+  files: any[] = [];
 
-  toggleHover(event: boolean) {
+  toggleHover(event: boolean): void {
     this.isHovering = event;
   }
 
-  onDrop(files: FileList) {
+  onDrop(files: FileList): void {
     for (let i = 0; i < files.length; i++) {
       this.files.push(files.item(i));
     }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -15,6 +14,7 @@ import { IDocumentType } from 'app/shared/model/document-type.model';
 import { DocumentTypeService } from 'app/entities/document-type/document-type.service';
 import { IStudent } from 'app/shared/model/student.model';
 import { StudentService } from 'app/entities/student/student.service';
+// import {IAttachment} from "app/shared/model/attachment.model";
 
 type SelectableEntity = ITag | ICourse | IDocumentType | IStudent;
 
@@ -29,7 +29,7 @@ export class DocumentUpdateComponent implements OnInit {
   documenttypes: IDocumentType[] = [];
   students: IStudent[] = [];
   courseId?: string;
-  Attachments: IAttachmentِ[] = [];
+  // attachments?: IAttachmentِ[] = [];
 
   editForm = this.fb.group({
     id: [],

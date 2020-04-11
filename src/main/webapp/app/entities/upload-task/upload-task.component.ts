@@ -13,7 +13,7 @@ export class UploadTaskComponent implements OnInit {
   @Input() file?: File;
   show = true;
   task?: AngularFireUploadTask;
-  percentage?: Observable<number>;
+  percentage?: Observable<number | any>;
   snapshot?: Observable<any>;
   downloadURL?: string;
   ref?: any;
@@ -26,26 +26,28 @@ export class UploadTaskComponent implements OnInit {
 
   startUpload(): any {
     // The storage path
-    const path = `test/${Date.now()}_${this.file.name}`;
+    if (this.file) {
+      const path = `test/${Date.now()}_${this.file.name}`;
 
-    // Reference to storage bucket
-    this.ref = this.storage.ref(path);
+      // Reference to storage bucket
+      this.ref = this.storage.ref(path);
 
-    // The main task
-    this.task = this.storage.upload(path, this.file);
+      // The main task
+      this.task = this.storage.upload(path, this.file);
 
-    // Progress monitoring
-    this.percentage = this.task.percentageChanges();
+      // Progress monitoring
+      this.percentage = this.task.percentageChanges()!;
 
-    this.snapshot = this.task.snapshotChanges().pipe(
-      tap(),
-      // The file's download URL
-      finalize(() => {
-        this.ref.getDownloadURL().subscribe((fileUrl: string) => {
-          this.downloadURL = fileUrl;
-        });
-      })
-    );
+      this.snapshot = this.task.snapshotChanges().pipe(
+        tap(),
+        // The file's download URL
+        finalize(() => {
+          this.ref.getDownloadURL().subscribe((fileUrl: string) => {
+            this.downloadURL = fileUrl;
+          });
+        })
+      );
+    }
   }
 
   isActive(snapshot: any): any {
@@ -54,13 +56,17 @@ export class UploadTaskComponent implements OnInit {
 
   remove(): void {
     this.ref.delete().subscribe(() => {
-      alert(`تم حذف  الملف ${this.file.name}بنجاح`);
+      if (this.file) {
+        alert(`تم حذف  الملف ${this.file.name}بنجاح`);
+      }
     });
     this.show = false;
   }
 
   cancelUplode(): void {
-    this.task.cancel();
-    this.show = false;
+    if (this.task) {
+      this.task.cancel();
+      this.show = false;
+    }
   }
 }
