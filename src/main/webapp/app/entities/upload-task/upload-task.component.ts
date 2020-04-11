@@ -10,7 +10,7 @@ import { finalize, tap } from 'rxjs/operators';
   styleUrls: ['./upload-task.component.scss']
 })
 export class UploadTaskComponent implements OnInit {
-  @Input() file?: File;
+  @Input() file?: any;
   show = true;
   task?: AngularFireUploadTask;
   percentage?: Observable<number | any>;
@@ -33,21 +33,21 @@ export class UploadTaskComponent implements OnInit {
       this.ref = this.storage.ref(path);
 
       // The main task
-      const blob = new Blob([this.file], { type: this.file.type });
-      this.task = this.storage.upload(path, blob);
+      this.task = this.ref.put(this.file);
+      if (this.task) {
+        // Progress monitoring
+        this.percentage = this.task.percentageChanges()!;
 
-      // Progress monitoring
-      this.percentage = this.task.percentageChanges()!;
-
-      this.snapshot = this.task.snapshotChanges().pipe(
-        tap(),
-        // The file's download URL
-        finalize(() => {
-          this.ref.getDownloadURL().subscribe((fileUrl: string) => {
-            this.downloadURL = fileUrl;
-          });
-        })
-      );
+        this.snapshot = this.task.snapshotChanges().pipe(
+          tap(),
+          // The file's download URL
+          finalize(() => {
+            this.ref.getDownloadURL().subscribe((fileUrl: string) => {
+              this.downloadURL = fileUrl;
+            });
+          })
+        );
+      }
     }
   }
 
