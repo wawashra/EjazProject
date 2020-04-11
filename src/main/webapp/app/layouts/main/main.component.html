@@ -1,52 +1,14 @@
-<html style="height: 100vh;">
-
-<body class="full-height full-width">
-<div class="full-height full-width" style="overflow-x: hidden;">
+<div class="drawer-container">
     <div>
         <router-outlet name="navbar"></router-outlet>
     </div>
-
-    <div class="row" style="height: 93%;">
-        <div *ngIf="isAuthenticated()" class="col-2" id="sidebar">
-            <ul class="list-unstyled components stickyy">
-
-                <li>
-                    <a data-toggle="collapse" aria-expanded="true" (click)="onClick()"
-                       class="active">
-                        <i
-                            class="fab fa-discourse">
-
-                        </i>
-                        المساقات الدراسية
-                        <i class="fas" [ngClass]="{
-    'fa-chevron-up': isExpanded,
-    'fa-chevron-down':!isExpanded
-    }"></i>
-                    </a>
-                    <ul *ngIf="isExpanded" class="list-unstyled" id="CoursesMenu" >
-                        <li *ngFor="let course of courses">
-                            <a href="#">{{course.name}}</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <!--                <li>-->
-                <!--                    <a href="#"><i class="fas fa-project-diagram"></i> صفحة الموقع</a>-->
-                <!--                </li>-->
-            </ul>
-
-        </div>
-        <div class="col pl-0 mt-0 pr-0">
-            <div class="container-fluid pr-0 full-height full-width pt-3">
-                <div class="card jh-card mt-0 pr-0" style="margin: 0 !important; padding: 0 !important;">
-                    <router-outlet></router-outlet>
-                    <jhi-footer *ngIf="!isAuthenticated()"></jhi-footer>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
+    <mat-divider></mat-divider>
+    <mat-drawer-container dir="rtl" class="drawer-container">
+        <mat-drawer mode="side" [opened]="sideBarOpen" *ngIf="isAuthenticated()">
+            <jhi-sidebar ></jhi-sidebar>
+        </mat-drawer>
+        <mat-drawer-content>
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
 </div>
-</body>
-</html>

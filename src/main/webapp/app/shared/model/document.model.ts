@@ -15,6 +15,8 @@ export interface IDocument {
   tags?: ITag[];
   courseSymbol?: string;
   courseId?: number;
+  documentTypeType?: string;
+  documentTypeId?: number;
   studentName?: string;
   studentId?: number;
 }
@@ -33,6 +35,8 @@ export class Document implements IDocument {
     public tags?: ITag[],
     public courseSymbol?: string,
     public courseId?: number,
+    public documentTypeType?: string,
+    public documentTypeId?: number,
     public studentName?: string,
     public studentId?: number
   ) {

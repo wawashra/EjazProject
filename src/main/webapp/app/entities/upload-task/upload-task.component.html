@@ -1,0 +1,43 @@
+<div *ngIf="show">
+    <mat-divider></mat-divider>
+    <div *ngIf="snapshot | async as snap">
+        <div *ngIf="downloadURL as url">
+            <a [href]="url" target="_blank" rel="noopener">
+                <h2>
+                    إسم الملف
+                    {{file.name}}
+                </h2>
+            </a>
+
+            <h5>
+                الحجم النهائي
+                {{file.size}}
+                كيلوا بايت
+            </h5>
+            <h5>
+                نوع الملف
+                {{file.type}}
+            </h5>
+            <!--        <img [src]="url"><br>-->
+
+        </div>
+
+        <button (click)="task.pause()" [disabled]="!isActive(snap)">توقيف مؤقت لرفع الملف</button>
+        <button (click)="cancelUplode()" [disabled]="!isActive(snap)">إلغاء رفع الملف</button>
+        <button (click)="task.resume()" [disabled]="!(snap?.state === 'paused')">استئناف رفع الملف</button>
+        <button (click)="remove()" [disabled]="isActive(snap)">حذف الملف</button>
+        <p dir="rtl">
+            تم رفع
+            {{snap.bytesTransferred }}
+            من
+            {{ snap.totalBytes }}
+        </p>
+
+    </div>
+
+    <div *ngIf="percentage | async as pct">
+        <progress [value]="pct" max="100"></progress>
+        {{ pct | number }}%
+    </div>
+    <mat-divider></mat-divider>
+</div>

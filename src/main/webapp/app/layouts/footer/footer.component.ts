@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['footer.scss']
 })
 export class FooterComponent {
-  logoFooter = '../../../content/images/logo-footer.jpg';
+  logoFooter = '../../../content/images/ejaz-logo.png';
   socialIcons = '../../../content/images/social-icons.jpg';
 }

@@ -37,6 +37,9 @@
             <column name="course_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="document_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="student_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -60,7 +63,7 @@
     </changeSet>
     
     <!-- Added the entity audit columns -->
-    <changeSet id="20200310220500-audit-1" author="jhipster-entity-audit">
+    <changeSet id="20200310220800-audit-1" author="jhipster-entity-audit">
         <addColumn tableName="document">
             <column name="created_by" type="varchar(50)" defaultValue="system">
                 <constraints nullable="false"/>

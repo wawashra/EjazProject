@@ -43,9 +43,15 @@ import { RouterModule } from '@angular/router';
       {
         path: 'student',
         loadChildren: () => import('./student/student.module').then(m => m.EjazStudentModule)
+      },
+      {
+        path: 'document-type',
+        loadChildren: () => import('./document-type/document-type.module').then(m => m.EjazDocumentTypeModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])
-  ]
+  ],
+  exports: [],
+  declarations: []
 })
 export class EjazEntityModule {}

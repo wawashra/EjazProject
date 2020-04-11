@@ -1,0 +1,47 @@
+<mat-nav-list>
+    <div class="profile-card">
+        <div>
+            <h2>Waseem Awashra</h2>
+        </div>
+        <img
+            [src]="profile">
+    </div>
+
+    <mat-divider></mat-divider>
+    <h2 matSubheader>
+        <i class="fas fa-book-reader fa-2x pl-2"></i>
+        <h4>مساقاتي الدراسية</h4>
+    </h2>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/course/1/view">
+        <i class="fas fa-book-open pl-2"></i>
+        الغناء بالنوته
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/course/2/view">
+        <i class="fas fa-book-open pl-2"></i>
+        قواعد البيانات
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/course/3/view">
+        <i class="fas fa-book-open pl-2"></i>
+        مدخل الي علم الحيوانات
+    </a>
+    <mat-divider></mat-divider>
+    <!-- <h2 matSubheader>Tools</h2>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/contacts">
+        <mat-icon>import_contacts</mat-icon>
+        Contacts
+    </a>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/contacts">
+        <mat-icon>contact_phone</mat-icon>
+        Leads
+    </a> -->
+</mat-nav-list>
+
+<div>
+    <img [src]="logoFooter" class="img-fluid" alt="d" />
+    <div class="col-12 text-white text-center pt-4">
+        <h6><small>جميع الحقوق محفوظة لدى فريق عمل إيجاز</small></h6>
+    </div>
+</div>

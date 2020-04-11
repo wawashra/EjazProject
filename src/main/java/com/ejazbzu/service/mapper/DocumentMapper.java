@@ -9,11 +9,13 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Document} and its DTO {@link DocumentDTO}.
  */
-@Mapper(componentModel = "spring", uses = {TagMapper.class, CourseMapper.class, StudentMapper.class})
+@Mapper(componentModel = "spring", uses = {TagMapper.class, CourseMapper.class, DocumentTypeMapper.class, StudentMapper.class})
 public interface DocumentMapper extends EntityMapper<DocumentDTO, Document> {
 
     @Mapping(source = "course.id", target = "courseId")
     @Mapping(source = "course.symbol", target = "courseSymbol")
+    @Mapping(source = "documentType.id", target = "documentTypeId")
+    @Mapping(source = "documentType.type", target = "documentTypeType")
     @Mapping(source = "student.id", target = "studentId")
     @Mapping(source = "student.name", target = "studentName")
     DocumentDTO toDto(Document document);
@@ -24,6 +26,7 @@ public interface DocumentMapper extends EntityMapper<DocumentDTO, Document> {
     @Mapping(target = "removeReport", ignore = true)
     @Mapping(target = "removeTags", ignore = true)
     @Mapping(source = "courseId", target = "course")
+    @Mapping(source = "documentTypeId", target = "documentType")
     @Mapping(source = "studentId", target = "student")
     Document toEntity(DocumentDTO documentDTO);
 

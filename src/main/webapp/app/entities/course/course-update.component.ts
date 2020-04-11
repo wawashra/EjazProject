@@ -38,7 +38,7 @@ export class CourseUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ course }) => {
       this.updateForm(course);
 
-      this.departmentService.query().subscribe((res: HttpResponse<IDepartment[]>) => (this.departments = res.body || []));
+      this.departmentService.query({size:100}).subscribe((res: HttpResponse<IDepartment[]>) => (this.departments = res.body || []));
     });
   }
 

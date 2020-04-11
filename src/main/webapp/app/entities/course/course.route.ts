@@ -11,6 +11,8 @@ import { CourseService } from './course.service';
 import { CourseComponent } from './course.component';
 import { CourseDetailComponent } from './course-detail.component';
 import { CourseUpdateComponent } from './course-update.component';
+import { DocumentUpdateComponent } from 'app/entities/document/document-update.component';
+import { DocumentResolve } from 'app/entities/document/document.route';
 
 @Injectable({ providedIn: 'root' })
 export class CourseResolve implements Resolve<ICourse> {
@@ -18,6 +20,7 @@ export class CourseResolve implements Resolve<ICourse> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<ICourse> | Observable<never> {
     const id = route.params['id'];
+
     if (id) {
       return this.service.find(id).pipe(
         flatMap((course: HttpResponse<Course>) => {
@@ -79,8 +82,20 @@ export const courseRoute: Routes = [
       course: CourseResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'ejazApp.course.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':cid/newdocument',
+    component: DocumentUpdateComponent,
+    resolve: {
+      document: DocumentResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'ejazApp.document.home.title'
     },
     canActivate: [UserRouteAccessService]
   }

@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,6 +11,7 @@ import { ICourse } from 'app/shared/model/course.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { CourseService } from './course.service';
 import { CourseDeleteDialogComponent } from './course-delete-dialog.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'jhi-course',
@@ -24,7 +26,9 @@ export class CourseComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
-
+  myControl = new FormControl();
+  options: string[] = ['وسيم', 'إيلياء', 'وردة'];
+  filteredOptions?: Observable<string[]>;
   constructor(
     protected courseService: CourseService,
     protected activatedRoute: ActivatedRoute,
@@ -33,6 +37,11 @@ export class CourseComponent implements OnInit, OnDestroy {
     protected modalService: NgbModal
   ) {}
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().startsWith(filterValue));
+  }
   loadPage(page?: number): void {
     const pageToLoad: number = page || this.page;
 
@@ -57,6 +66,10 @@ export class CourseComponent implements OnInit, OnDestroy {
       this.loadPage();
     });
     this.registerChangeInCourses();
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
   }
 
   ngOnDestroy(): void {
