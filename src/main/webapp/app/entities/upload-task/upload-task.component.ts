@@ -41,7 +41,7 @@ export class UploadTaskComponent implements OnInit {
       this.ref = this.storage.ref(path);
 
       // The main task
-      this.task = this.ref.put(this.file);
+      this.task = this.ref.put(this.file, { customMetadata: { blah: 'blah' } });
       if (this.task) {
         // Progress monitoring
         this.percentage = this.task.percentageChanges()!;
