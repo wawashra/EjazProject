@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -10,11 +11,12 @@ import { ITag } from 'app/shared/model/tag.model';
 import { TagService } from 'app/entities/tag/tag.service';
 import { ICourse } from 'app/shared/model/course.model';
 import { CourseService } from 'app/entities/course/course.service';
+import { IDocumentType } from 'app/shared/model/document-type.model';
+import { DocumentTypeService } from 'app/entities/document-type/document-type.service';
 import { IStudent } from 'app/shared/model/student.model';
 import { StudentService } from 'app/entities/student/student.service';
-import { IAttachment } from 'app/shared/model/attachment.model';
 
-type SelectableEntity = ITag | ICourse | IStudent;
+type SelectableEntity = ITag | ICourse | IDocumentType | IStudent;
 
 @Component({
   selector: 'jhi-document-update',
@@ -24,11 +26,11 @@ export class DocumentUpdateComponent implements OnInit {
   isSaving = false;
   tags: ITag[] = [];
   courses: ICourse[] = [];
+  documenttypes: IDocumentType[] = [];
   students: IStudent[] = [];
-
+  courseId?: string;
   Attachments: IAttachmentِ[] = [];
 
-  courseId?: string;
   editForm = this.fb.group({
     id: [],
     title: [null, [Validators.required]],
@@ -39,6 +41,7 @@ export class DocumentUpdateComponent implements OnInit {
     view: [],
     tags: [],
     courseId: [],
+    documentTypeId: [],
     studentId: []
   });
 
@@ -46,6 +49,7 @@ export class DocumentUpdateComponent implements OnInit {
     protected documentService: DocumentService,
     protected tagService: TagService,
     protected courseService: CourseService,
+    protected documentTypeService: DocumentTypeService,
     protected studentService: StudentService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -60,9 +64,12 @@ export class DocumentUpdateComponent implements OnInit {
       if (this.courseId) {
         fil['id.equals'] = this.courseId;
       }
+
       this.tagService.query().subscribe((res: HttpResponse<ITag[]>) => (this.tags = res.body || []));
 
       this.courseService.query(fil).subscribe((res: HttpResponse<ICourse[]>) => (this.courses = res.body || []));
+
+      this.documentTypeService.query().subscribe((res: HttpResponse<IDocumentType[]>) => (this.documenttypes = res.body || []));
 
       this.studentService.query().subscribe((res: HttpResponse<IStudent[]>) => (this.students = res.body || []));
     });
@@ -79,6 +86,7 @@ export class DocumentUpdateComponent implements OnInit {
       view: document.view,
       tags: document.tags,
       courseId: document.courseId,
+      documentTypeId: document.documentTypeId,
       studentId: document.studentId
     });
   }
@@ -90,7 +98,6 @@ export class DocumentUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const document = this.createFromForm();
-
     if (document.id !== undefined) {
       this.subscribeToSaveResponse(this.documentService.update(document));
     } else {
@@ -110,6 +117,7 @@ export class DocumentUpdateComponent implements OnInit {
       view: this.editForm.get(['view'])!.value,
       tags: this.editForm.get(['tags'])!.value,
       courseId: this.editForm.get(['courseId'])!.value,
+      documentTypeId: this.editForm.get(['documentTypeId'])!.value,
       studentId: this.editForm.get(['studentId'])!.value
     };
   }

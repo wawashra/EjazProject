@@ -15,14 +15,14 @@ import { UploadTaskComponent } from 'app/entities/upload-task/upload-task.compon
 import { UploaderComponent } from 'app/entities/uploader/uploader.component';
 import { DropzoneDirective } from 'app/dropzone.directive';
 const config = {
-  apiKey: 'AIzaSyDG_ZQdmFTVqpjJGMgtIHM13YkDq4Sqx5A',
-  authDomain: 'ejaz-3cba5.firebaseapp.com',
-  databaseURL: 'https://ejaz-3cba5.firebaseio.com',
-  projectId: 'ejaz-3cba5',
-  storageBucket: 'ejaz-3cba5.appspot.com',
-  messagingSenderId: '584026588503',
-  appId: '1:584026588503:web:57ec5449eebfd6b1372a12',
-  measurementId: 'G-D006ZBXLZQ'
+  apiKey: '',
+  authDomain: '',
+  databaseURL: '',
+  projectId: '',
+  storageBucket: '',
+  messagingSenderId: '',
+  appId: '',
+  measurementId: ''
 };
 @NgModule({
   imports: [

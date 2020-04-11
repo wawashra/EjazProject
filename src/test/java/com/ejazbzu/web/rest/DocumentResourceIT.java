@@ -6,6 +6,7 @@ import com.ejazbzu.domain.Attachment;
 import com.ejazbzu.domain.Report;
 import com.ejazbzu.domain.Tag;
 import com.ejazbzu.domain.Course;
+import com.ejazbzu.domain.DocumentType;
 import com.ejazbzu.domain.Student;
 import com.ejazbzu.repository.DocumentRepository;
 import com.ejazbzu.service.DocumentService;
@@ -927,6 +928,26 @@ public class DocumentResourceIT {
 
         // Get all the documentList where course equals to courseId + 1
         defaultDocumentShouldNotBeFound("courseId.equals=" + (courseId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllDocumentsByDocumentTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        documentRepository.saveAndFlush(document);
+        DocumentType documentType = DocumentTypeResourceIT.createEntity(em);
+        em.persist(documentType);
+        em.flush();
+        document.setDocumentType(documentType);
+        documentRepository.saveAndFlush(document);
+        Long documentTypeId = documentType.getId();
+
+        // Get all the documentList where documentType equals to documentTypeId
+        defaultDocumentShouldBeFound("documentTypeId.equals=" + documentTypeId);
+
+        // Get all the documentList where documentType equals to documentTypeId + 1
+        defaultDocumentShouldNotBeFound("documentTypeId.equals=" + (documentTypeId + 1));
     }
 
 

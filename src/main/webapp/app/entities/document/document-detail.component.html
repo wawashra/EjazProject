@@ -44,6 +44,12 @@
                         <a [routerLink]="['/course', document.courseId, 'view']">{{ document.courseSymbol }}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="ejazApp.document.documentType">Document Type</span></dt>
+                <dd>
+                    <div *ngIf="document.documentTypeId">
+                        <a [routerLink]="['/document-type', document.documentTypeId, 'view']">{{ document.documentTypeType }}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="ejazApp.document.student">Student</span></dt>
                 <dd>
                     <div *ngIf="document.studentId">
