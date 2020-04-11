@@ -3,6 +3,7 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
+import { AttachmentUplodeService } from 'app/entities/document/attachment-uplode.service';
 
 @Component({
   selector: 'jhi-upload-task',
@@ -11,14 +12,15 @@ import { finalize, tap } from 'rxjs/operators';
 })
 export class UploadTaskComponent implements OnInit {
   @Input() file?: any;
+  @Input() courseCode?: string;
+
   show = true;
   task?: AngularFireUploadTask;
   percentage?: Observable<number | any>;
   snapshot?: Observable<any>;
   downloadURL?: string;
   ref?: any;
-
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore) {}
+  constructor(private storage: AngularFireStorage, private db: AngularFirestore, private attachmentUplode: AttachmentUplodeService) {}
 
   ngOnInit(): void {
     this.startUpload();
@@ -27,7 +29,7 @@ export class UploadTaskComponent implements OnInit {
   startUpload(): any {
     // The storage path
     if (this.file) {
-      const path = `test/${Date.now()}_${this.file.name}`;
+      const path = `ejaz/${this.courseCode}/${Date.now()}_${this.file.name}`;
 
       // Reference to storage bucket
       this.ref = this.storage.ref(path);
@@ -44,6 +46,13 @@ export class UploadTaskComponent implements OnInit {
           finalize(() => {
             this.ref.getDownloadURL().subscribe((fileUrl: string) => {
               this.downloadURL = fileUrl;
+              this.attachmentUplode.add({
+                name: this.file.name,
+                fileSize: this.file.size,
+                url: fileUrl,
+                attachmentTypeId: 0,
+                fileType: this.file.type
+              });
             });
           })
         );
@@ -59,6 +68,7 @@ export class UploadTaskComponent implements OnInit {
     this.ref.delete().subscribe(() => {
       if (this.file) {
         alert(`تم حذف  الملف ${this.file.name}بنجاح`);
+        this.attachmentUplode.remove(this.file.name);
       }
     });
     this.show = false;
