@@ -18,7 +18,6 @@
     <include file="config/liquibase/changelog/20200310220500_added_entity_College.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200310220600_added_entity_Department.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200310220700_added_entity_Course.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200310220800_added_entity_Document.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200310220900_added_entity_AttachmentType.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200310221000_added_entity_Attachment.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200310221100_added_entity_Tag.xml" relativeToChangelogFile="false"/>
