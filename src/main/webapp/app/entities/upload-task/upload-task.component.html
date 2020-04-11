@@ -5,18 +5,18 @@
             <a [href]="url" target="_blank" rel="noopener">
                 <h2>
                     إسم الملف
-                    {{file.name}}
+                    {{file?.name}}
                 </h2>
             </a>
 
             <h5>
                 الحجم النهائي
-                {{file.size}}
+                {{file?.size}}
                 كيلوا بايت
             </h5>
             <h5>
                 نوع الملف
-                {{file.type}}
+                {{file?.type}}
             </h5>
             <!--        <img [src]="url"><br>-->
 
@@ -28,9 +28,9 @@
         <button (click)="remove()" [disabled]="isActive(snap)">حذف الملف</button>
         <p dir="rtl">
             تم رفع
-            {{snap.bytesTransferred }}
+            {{snap?.bytesTransferred }}
             من
-            {{ snap.totalBytes }}
+            {{ snap?.totalBytes }}
         </p>
 
     </div>
