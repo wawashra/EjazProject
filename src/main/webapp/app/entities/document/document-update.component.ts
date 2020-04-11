@@ -27,8 +27,6 @@ export class DocumentUpdateComponent implements OnInit {
   students: IStudent[] = [];
   courseId?: string;
   // attachments?: IAttachmentِ[] = [];
-
-  courseId?: string;
   editForm = this.fb.group({
     id: [],
     title: [null, [Validators.required]],
