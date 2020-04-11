@@ -24,6 +24,13 @@ export class UploaderComponent implements OnInit {
 
   onDrop(files: FileList): void {
     for (let i = 0; i < files.length; i++) {
+      alert(`
+      onDrop
+      ${files.item(i)!.name}
+      ${files.item(i)!.size}
+      ${files.item(i)!.type}
+
+      `);
       this.files.push(files.item(i));
     }
   }

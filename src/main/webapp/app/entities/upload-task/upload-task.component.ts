@@ -29,13 +29,19 @@ export class UploadTaskComponent implements OnInit {
   startUpload(): any {
     // The storage path
     if (this.file) {
+      alert(`
+      ${this.file.name}
+      ${this.file.path}
+      ${this.file.size}
+      ${this.file.type}
+      `);
       const path = `ejaz/${this.courseCode}/${Date.now()}_${this.file.name}`;
 
       // Reference to storage bucket
       this.ref = this.storage.ref(path);
 
       // The main task
-      this.task = this.ref.put(this.file);
+      this.task = this.ref.put(this.file, { customMetadata: { blah: 'blah' } });
       if (this.task) {
         // Progress monitoring
         this.percentage = this.task.percentageChanges()!;
