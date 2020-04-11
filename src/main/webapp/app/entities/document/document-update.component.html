@@ -45,14 +45,6 @@
                               formControlName="description"></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ejazApp.document.documentType" for="field_documentType">Document Type</label>
-                    <select class="form-control" id="field_documentType" name="documentType" formControlName="documentTypeId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="documentTypeOption.id" *ngFor="let documentTypeOption of documenttypes; trackBy: trackById">{{ documentTypeOption.type }}</option>
-                    </select>
-                </div>
-
                 <div class="form-group" *ngIf="!courseId">
                     <label class="form-control-label" jhiTranslate="ejazApp.document.ratingSum" for="field_ratingSum">Rating
                         Sum</label>

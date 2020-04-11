@@ -22,6 +22,7 @@ export class DocumentService {
   update(document: IDocument): Observable<EntityResponseType> {
     return this.http.put<IDocument>(this.resourceUrl, document, { observe: 'response' });
   }
+  أ;
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IDocument>(`${this.resourceUrl}/${id}`, { observe: 'response' });

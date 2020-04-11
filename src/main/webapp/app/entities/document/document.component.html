@@ -30,7 +30,6 @@
                     <th scope="col"  jhiSortBy="ratingNumber"><span jhiTranslate="ejazApp.document.ratingNumber">Rating Number</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="view"><span jhiTranslate="ejazApp.document.view">View</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="courseSymbol"><span jhiTranslate="ejazApp.document.course">Course</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="documentTypeType"><span jhiTranslate="ejazApp.document.documentType">Document Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="studentName"><span jhiTranslate="ejazApp.document.student">Student</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -47,11 +46,6 @@
                     <td>
                         <div *ngIf="document.courseId">
                             <a [routerLink]="['/course', document.courseId , 'view']" >{{ document.courseSymbol }}</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div *ngIf="document.documentTypeId">
-                            <a [routerLink]="['/document-type', document.documentTypeId , 'view']" >{{ document.documentTypeType }}</a>
                         </div>
                     </td>
                     <td>

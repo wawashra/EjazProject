@@ -125,10 +125,6 @@ public class DocumentQueryService extends QueryService<Document> {
                 specification = specification.and(buildSpecification(criteria.getCourseId(),
                     root -> root.join(Document_.course, JoinType.LEFT).get(Course_.id)));
             }
-            if (criteria.getDocumentTypeId() != null) {
-                specification = specification.and(buildSpecification(criteria.getDocumentTypeId(),
-                    root -> root.join(Document_.documentType, JoinType.LEFT).get(DocumentType_.id)));
-            }
             if (criteria.getStudentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getStudentId(),
                     root -> root.join(Document_.student, JoinType.LEFT).get(Student_.id)));

@@ -46,8 +46,6 @@ public class DocumentCriteria implements Serializable, Criteria {
 
     private LongFilter courseId;
 
-    private LongFilter documentTypeId;
-
     private LongFilter studentId;
 
     public DocumentCriteria() {
@@ -65,7 +63,6 @@ public class DocumentCriteria implements Serializable, Criteria {
         this.reportId = other.reportId == null ? null : other.reportId.copy();
         this.tagsId = other.tagsId == null ? null : other.tagsId.copy();
         this.courseId = other.courseId == null ? null : other.courseId.copy();
-        this.documentTypeId = other.documentTypeId == null ? null : other.documentTypeId.copy();
         this.studentId = other.studentId == null ? null : other.studentId.copy();
     }
 
@@ -162,14 +159,6 @@ public class DocumentCriteria implements Serializable, Criteria {
         this.courseId = courseId;
     }
 
-    public LongFilter getDocumentTypeId() {
-        return documentTypeId;
-    }
-
-    public void setDocumentTypeId(LongFilter documentTypeId) {
-        this.documentTypeId = documentTypeId;
-    }
-
     public LongFilter getStudentId() {
         return studentId;
     }
@@ -200,7 +189,6 @@ public class DocumentCriteria implements Serializable, Criteria {
             Objects.equals(reportId, that.reportId) &&
             Objects.equals(tagsId, that.tagsId) &&
             Objects.equals(courseId, that.courseId) &&
-            Objects.equals(documentTypeId, that.documentTypeId) &&
             Objects.equals(studentId, that.studentId);
     }
 
@@ -218,7 +206,6 @@ public class DocumentCriteria implements Serializable, Criteria {
         reportId,
         tagsId,
         courseId,
-        documentTypeId,
         studentId
         );
     }
@@ -237,7 +224,6 @@ public class DocumentCriteria implements Serializable, Criteria {
                 (reportId != null ? "reportId=" + reportId + ", " : "") +
                 (tagsId != null ? "tagsId=" + tagsId + ", " : "") +
                 (courseId != null ? "courseId=" + courseId + ", " : "") +
-                (documentTypeId != null ? "documentTypeId=" + documentTypeId + ", " : "") +
                 (studentId != null ? "studentId=" + studentId + ", " : "") +
             "}";
     }
