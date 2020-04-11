@@ -8,7 +8,7 @@
     "experimentalDecorators": true,
     "removeComments": false,
     "strict": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
