@@ -33,7 +33,8 @@ export class UploadTaskComponent implements OnInit {
       this.ref = this.storage.ref(path);
 
       // The main task
-      this.task = this.storage.upload(path, this.file);
+      const blob = new Blob([this.file], { type: this.file.type });
+      this.task = this.storage.upload(path, blob);
 
       // Progress monitoring
       this.percentage = this.task.percentageChanges()!;
