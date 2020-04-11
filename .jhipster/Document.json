@@ -60,13 +60,6 @@
         },
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "documentType",
-            "otherEntityRelationshipName": "document",
-            "relationshipName": "documentType",
-            "otherEntityField": "type"
-        },
-        {
-            "relationshipType": "many-to-one",
             "otherEntityName": "student",
             "otherEntityRelationshipName": "documents",
             "relationshipName": "student",

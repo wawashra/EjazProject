@@ -69,8 +69,6 @@ public class CacheConfiguration {
             createCache(cm, com.ejazbzu.domain.Student.class.getName() + ".reports");
             createCache(cm, com.ejazbzu.domain.Student.class.getName() + ".courses");
             createCache(cm, com.ejazbzu.domain.EntityAuditEvent.class.getName());
-            createCache(cm, com.ejazbzu.domain.DocumentType.class.getName());
-            createCache(cm, com.ejazbzu.domain.DocumentType.class.getName() + ".documents");
             // jhipster-needle-ehcache-add-entry
         };
     }

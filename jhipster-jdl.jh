@@ -22,10 +22,6 @@ entity Course {
     coverImgUrl String
 }
 
-entity DocumentType {
-    //EXAM, NOTE, BOOK, SLIDE, QUIZ, HOMEWORK, ASSIGNMENT, SOLUTION, ETC
-	type String required,
-}
 entity Document {
     title String required,
     active Boolean,
@@ -39,6 +35,7 @@ entity AttachmentType {
     //EXAM, NOTE, BOOK, SLIDE, QUIZ, HOMEWORK, ASSIGNMENT, SOLUTION, ETC
 	type String required,
 }
+
 entity Attachment {
     name String required,
 	url String required,
@@ -73,9 +70,7 @@ relationship OneToMany {
     Department {course(symbol) required} to Course{department(symbol)},
     Course {document(title) required} to Document{course(symbol)},
  	Document{attachment(name) required} to Attachment{document(title)},
-    AttachmentType{attachment(name) required} to Attachment{attachmentType(type)},
-    DocumentType{document(id) required} to Document{documentType(type)}
-
+    AttachmentType{attachment(name) required} to Attachment{attachmentType(type)}
     Document{report} to Report{document(title)},
     Student {documents(title)} to Document{student(name)},
     Student {report} to Report{student(name)}

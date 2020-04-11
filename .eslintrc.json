@@ -19,13 +19,6 @@
         "ignoreRestSiblings": false
       }
     ],
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "@typescript-eslint/no-misused-promises": [
-      "error",
-      {
-        "checksConditionals": false,
-        "checksVoidReturn": false
-      }
-    ]
+    "@typescript-eslint/no-non-null-assertion": "off"
   }
 }

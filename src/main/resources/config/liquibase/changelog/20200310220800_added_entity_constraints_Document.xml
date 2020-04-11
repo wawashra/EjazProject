@@ -26,12 +26,6 @@
                                  referencedColumnNames="id"
                                  referencedTableName="course"/>
 
-        <addForeignKeyConstraint baseColumnNames="document_type_id"
-                                 baseTableName="document"
-                                 constraintName="fk_document_document_type_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="document_type"/>
-
         <addForeignKeyConstraint baseColumnNames="student_id"
                                  baseTableName="document"
                                  constraintName="fk_document_student_id"
