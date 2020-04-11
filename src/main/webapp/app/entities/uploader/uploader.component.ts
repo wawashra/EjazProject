@@ -1,14 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AttachmentUplodeService } from 'app/entities/document/attachment-uplode.service';
 
 @Component({
   selector: 'jhi-uploader',
   templateUrl: './uploader.component.html',
   styleUrls: ['./uploader.component.scss']
 })
-export class UploaderComponent {
+export class UploaderComponent implements OnInit {
   isHovering?: boolean;
-
   files: any[] = [];
+  courseCode?: string;
+  constructor(private attachmentUploded: AttachmentUplodeService) {}
+
+  ngOnInit(): void {
+    this.attachmentUploded.courseSymbolOb.subscribe((symp: string) => {
+      this.courseCode = symp;
+    });
+  }
 
   toggleHover(event: boolean): void {
     this.isHovering = event;

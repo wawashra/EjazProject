@@ -12,7 +12,9 @@ import { ICourse } from 'app/shared/model/course.model';
 import { CourseService } from 'app/entities/course/course.service';
 import { IStudent } from 'app/shared/model/student.model';
 import { StudentService } from 'app/entities/student/student.service';
-// import {IAttachment} from "app/shared/model/attachment.model";
+import { AttachmentUplodeService } from 'app/entities/document/attachment-uplode.service';
+import { AttachmentService } from 'app/entities/attachment/attachment.service';
+import { Attachment } from 'app/shared/model/attachment.model';
 
 type SelectableEntity = ITag | ICourse | IStudent;
 
@@ -26,7 +28,9 @@ export class DocumentUpdateComponent implements OnInit {
   courses: ICourse[] = [];
   students: IStudent[] = [];
   courseId?: string;
+
   // attachments?: IAttachmentِ[] = [];
+  attachments?: Map<string, any>;
   editForm = this.fb.group({
     id: [],
     title: [null, [Validators.required]],
@@ -46,21 +50,39 @@ export class DocumentUpdateComponent implements OnInit {
     protected courseService: CourseService,
     protected studentService: StudentService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private attachmentUploded: AttachmentUplodeService,
+    private attachmentService: AttachmentService
   ) {}
 
   ngOnInit(): void {
+    this.attachments = new Map<string, any>();
     this.courseId = this.activatedRoute.snapshot.paramMap.get('cid') || '';
+    this.attachmentUploded.addedOb.subscribe((att: any) => {
+      this.attachments!.set(att.name, att);
+    });
+
+    this.attachmentUploded.removedOb.subscribe(name => {
+      this.attachments!.delete(name);
+    });
 
     this.activatedRoute.data.subscribe(({ document }) => {
       this.updateForm(document);
+
       const fil = {};
+
       if (this.courseId) {
         fil['id.equals'] = this.courseId;
       }
+
       this.tagService.query().subscribe((res: HttpResponse<ITag[]>) => (this.tags = res.body || []));
 
-      this.courseService.query(fil).subscribe((res: HttpResponse<ICourse[]>) => (this.courses = res.body || []));
+      this.courseService.query(fil).subscribe((res: HttpResponse<ICourse[]>) => {
+        this.courses = res.body || [];
+        if (this.courses != null) {
+          this.attachmentUploded.sendCourseSymbol(this.courses[0].symbol || '');
+        }
+      });
 
       this.studentService.query().subscribe((res: HttpResponse<IStudent[]>) => (this.students = res.body || []));
     });
@@ -114,7 +136,21 @@ export class DocumentUpdateComponent implements OnInit {
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IDocument>>): void {
     result.subscribe(
-      () => this.onSaveSuccess(),
+      (doc: HttpResponse<IDocument>) => {
+        this.attachments!.forEach((value: any, key: string) => {
+          this.attachmentService.create({
+            ...new Attachment(),
+            name: key,
+            url: value.url,
+            extension: value.fileType,
+            fileSize: value.fileSize,
+            hits: 0,
+            documentId: doc.body!.id,
+            attachmentTypeId: 1
+          });
+        });
+        this.onSaveSuccess();
+      },
       () => this.onSaveError()
     );
   }
