@@ -1,5 +1,11 @@
 <div class="row justify-content-center">
     <div class="col-8">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-document" [routerLink]="['/course', course.id, 'newdocument']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="ejazApp.document.home.createLabel">
+            Create a new Document
+            </span>
+        </button>
         <div *ngIf="course">
             <h2><span jhiTranslate="ejazApp.course.detail.title">Course</span> {{ course.id }}</h2>
 

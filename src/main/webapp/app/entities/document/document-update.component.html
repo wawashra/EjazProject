@@ -1,53 +1,73 @@
 <div class="row justify-content-center">
-    <div class="col-8">
+    <div class="col-8 ">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-document-heading" jhiTranslate="ejazApp.document.home.createOrEditLabel">Create or edit a Document</h2>
+            <h2 id="jhi-document-heading"">
+            إضافة او تعديل Document
+            </h2>
+            <h2 *ngIf="courseId">
+                {{courses[0]?.name}}
+            </h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
 
                 <div class="form-group" [hidden]="!editForm.get('id')!.value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ejazApp.document.title" for="field_title">Title</label>
+                    <label class="form-control-label" jhiTranslate="ejazApp.document.title"
+                           for="field_title">Title</label>
                     <input type="text" class="form-control" name="title" id="field_title"
                            formControlName="title"/>
-                    <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+                    <div
+                        *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('title')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
+                               *ngIf="editForm.get('title')?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
                         </small>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ejazApp.document.active" for="field_active">Active</label>
+                <div class="form-group" *ngIf="!courseId">
+                    <label class="form-control-label" jhiTranslate="ejazApp.document.active"
+                           for="field_active">Active</label>
                     <input type="checkbox" class="form-control" name="active" id="field_active"
                            formControlName="active"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ejazApp.document.description" for="field_description">Description</label>
-                    <input type="text" class="form-control" name="description" id="field_description"
-                           formControlName="description"/>
+                    <label class="form-control-label" jhiTranslate="ejazApp.document.description"
+                           for="field_description">Description</label>
+                    <textarea type="text" class="form-control" name="description" id="field_description"
+                              formControlName="description"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ejazApp.document.ratingSum" for="field_ratingSum">Rating Sum</label>
+                    <label class="form-control-label" jhiTranslate="ejazApp.document.documentType" for="field_documentType">Document Type</label>
+                    <select class="form-control" id="field_documentType" name="documentType" formControlName="documentTypeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="documentTypeOption.id" *ngFor="let documentTypeOption of documenttypes; trackBy: trackById">{{ documentTypeOption.type }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group" *ngIf="!courseId">
+                    <label class="form-control-label" jhiTranslate="ejazApp.document.ratingSum" for="field_ratingSum">Rating
+                        Sum</label>
                     <input type="number" class="form-control" name="ratingSum" id="field_ratingSum"
                            formControlName="ratingSum"/>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ejazApp.document.ratingNumber" for="field_ratingNumber">Rating Number</label>
+                <div class="form-group" *ngIf="!courseId">
+                    <label class="form-control-label" jhiTranslate="ejazApp.document.ratingNumber"
+                           for="field_ratingNumber">Rating Number</label>
                     <input type="number" class="form-control" name="ratingNumber" id="field_ratingNumber"
                            formControlName="ratingNumber"/>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" *ngIf="!courseId">
                     <label class="form-control-label" jhiTranslate="ejazApp.document.view" for="field_view">View</label>
                     <input type="number" class="form-control" name="view" id="field_view"
                            formControlName="view"/>
@@ -56,36 +76,42 @@
                 <div class="form-group">
                     <label jhiTranslate="ejazApp.document.tags" for="field_tags">Tags</label>
                     <select class="form-control" id="field_tags" multiple name="tags" formControlName="tags">
-                        <option [ngValue]="getSelected(editForm.get('tags')!.value, tagOption)" *ngFor="let tagOption of tags; trackBy: trackById">{{ tagOption.name }}</option>
+                        <option [ngValue]="getSelected(editForm.get('tags')!.value, tagOption)"
+                                *ngFor="let tagOption of tags; trackBy: trackById">{{ tagOption.name }}</option>
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ejazApp.document.course" for="field_course">Course</label>
+                <div class="form-group" *ngIf="!courseId">
+                    <label class="form-control-label" jhiTranslate="ejazApp.document.course"
+                           for="field_course">Course</label>
                     <select class="form-control" id="field_course" name="course" formControlName="courseId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="courseOption.id" *ngFor="let courseOption of courses; trackBy: trackById">{{ courseOption.symbol }}</option>
+                        <option [ngValue]="courseOption.id"
+                                *ngFor="let courseOption of courses; trackBy: trackById">{{ courseOption.name }}</option>
                     </select>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" *ngIf="!courseId">
                     <label class="form-control-label" jhiTranslate="ejazApp.document.student" for="field_student">Student</label>
                     <select class="form-control" id="field_student" name="student" formControlName="studentId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="studentOption.id" *ngFor="let studentOption of students; trackBy: trackById">{{ studentOption.name }}</option>
+                        <option [ngValue]="studentOption.id"
+                                *ngFor="let studentOption of students; trackBy: trackById">{{ studentOption.name }}</option>
                     </select>
                 </div>
-            </div>
+                <div class="form-group" *ngIf="courseId">
+                    <jhi-uploader></jhi-uploader>
+                </div>
 
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
+                <div>
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
 
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
-            </div>
+                    <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                            class="btn btn-primary">
+                        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    </button>
+                </div>
         </form>
     </div>
 </div>

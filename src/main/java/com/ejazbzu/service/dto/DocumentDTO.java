@@ -33,6 +33,10 @@ public class DocumentDTO extends AbstractAuditingDTO implements Serializable {
 
     private String courseSymbol;
 
+    private Long documentTypeId;
+
+    private String documentTypeType;
+
     private Long studentId;
 
     private String studentName;
@@ -117,6 +121,22 @@ public class DocumentDTO extends AbstractAuditingDTO implements Serializable {
         this.courseSymbol = courseSymbol;
     }
 
+    public Long getDocumentTypeId() {
+        return documentTypeId;
+    }
+
+    public void setDocumentTypeId(Long documentTypeId) {
+        this.documentTypeId = documentTypeId;
+    }
+
+    public String getDocumentTypeType() {
+        return documentTypeType;
+    }
+
+    public void setDocumentTypeType(String documentTypeType) {
+        this.documentTypeType = documentTypeType;
+    }
+
     public Long getStudentId() {
         return studentId;
     }
@@ -166,6 +186,8 @@ public class DocumentDTO extends AbstractAuditingDTO implements Serializable {
             ", view=" + getView() +
             ", courseId=" + getCourseId() +
             ", courseSymbol='" + getCourseSymbol() + "'" +
+            ", documentTypeId=" + getDocumentTypeId() +
+            ", documentTypeType='" + getDocumentTypeType() + "'" +
             ", studentId=" + getStudentId() +
             ", studentName='" + getStudentName() + "'" +
             "}";

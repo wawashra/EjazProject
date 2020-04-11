@@ -13,6 +13,7 @@
     "use-pipe-transform-interface": false,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "typedef": [true, "call-signature"]
+    "typedef": [true, "call-signature"],
+    "checksVoidReturn": false
   }
 }

@@ -65,6 +65,10 @@ public class Document extends AbstractAuditingEntity implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("documents")
+    private DocumentType documentType;
+
+    @ManyToOne
+    @JsonIgnoreProperties("documents")
     private Student student;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -240,6 +244,19 @@ public class Document extends AbstractAuditingEntity implements Serializable {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public DocumentType getDocumentType() {
+        return documentType;
+    }
+
+    public Document documentType(DocumentType documentType) {
+        this.documentType = documentType;
+        return this;
+    }
+
+    public void setDocumentType(DocumentType documentType) {
+        this.documentType = documentType;
     }
 
     public Student getStudent() {

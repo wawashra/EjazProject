@@ -6,16 +6,43 @@ import { AlertErrorComponent } from './alert/alert-error.component';
 import { LoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { SearchComponent } from 'app/layouts/search/search.component';
-
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { DocumentUpdateComponent } from 'app/entities/document/document-update.component';
+import { UploadTaskComponent } from 'app/entities/upload-task/upload-task.component';
+import { UploaderComponent } from 'app/entities/uploader/uploader.component';
+import { DropzoneDirective } from 'app/dropzone.directive';
+const config = {
+  apiKey: '',
+  authDomain: '',
+  databaseURL: '',
+  projectId: '',
+  storageBucket: '',
+  messagingSenderId: '',
+  appId: '',
+  measurementId: ''
+};
 @NgModule({
-  imports: [EjazSharedLibsModule],
+  imports: [
+    EjazSharedLibsModule,
+    AngularFireModule.initializeApp(config),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule
+  ],
   declarations: [
     FindLanguageFromKeyPipe,
     AlertComponent,
     AlertErrorComponent,
     LoginModalComponent,
     HasAnyAuthorityDirective,
-    SearchComponent
+    SearchComponent,
+    DocumentUpdateComponent,
+    UploaderComponent,
+    UploadTaskComponent,
+    DropzoneDirective
   ],
   entryComponents: [LoginModalComponent],
   exports: [
@@ -25,7 +52,9 @@ import { SearchComponent } from 'app/layouts/search/search.component';
     AlertErrorComponent,
     LoginModalComponent,
     HasAnyAuthorityDirective,
-    SearchComponent
+    SearchComponent,
+    UploaderComponent,
+    UploadTaskComponent
   ]
 })
 export class EjazSharedModule {}
