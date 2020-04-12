@@ -1,5 +1,7 @@
 package com.ejazbzu.service.dto;
 
+import com.ejazbzu.domain.Attachment;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -36,6 +38,16 @@ public class DocumentDTO extends AbstractAuditingDTO implements Serializable {
     private Long studentId;
 
     private String studentName;
+
+    private Set<Attachment> attachments = new HashSet<>();
+
+    public Set<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(Set<Attachment> attachments) {
+        this.attachments = attachments;
+    }
 
     public Long getId() {
         return id;

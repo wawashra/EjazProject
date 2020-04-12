@@ -1,5 +1,7 @@
 package com.ejazbzu.service.impl;
 
+import com.ejazbzu.domain.Attachment;
+import com.ejazbzu.repository.AttachmentRepository;
 import com.ejazbzu.service.DocumentService;
 import com.ejazbzu.domain.Document;
 import com.ejazbzu.repository.DocumentRepository;
@@ -26,11 +28,15 @@ public class DocumentServiceImpl implements DocumentService {
 
     private final DocumentRepository documentRepository;
 
+    private final AttachmentRepository attachmentRepository;
+
     private final DocumentMapper documentMapper;
 
-    public DocumentServiceImpl(DocumentRepository documentRepository, DocumentMapper documentMapper) {
+
+    public DocumentServiceImpl(DocumentRepository documentRepository, DocumentMapper documentMapper, AttachmentRepository attachmentRepository) {
         this.documentRepository = documentRepository;
         this.documentMapper = documentMapper;
+        this.attachmentRepository = attachmentRepository;
     }
 
     /**
@@ -44,6 +50,12 @@ public class DocumentServiceImpl implements DocumentService {
         log.debug("Request to save Document : {}", documentDTO);
         Document document = documentMapper.toEntity(documentDTO);
         document = documentRepository.save(document);
+
+        for (Attachment attachment : documentDTO.getAttachments()) {
+            attachment.setDocument(document);
+            document.getAttachments().add(attachmentRepository.save(attachment));
+        }
+
         return documentMapper.toDto(document);
     }
 
