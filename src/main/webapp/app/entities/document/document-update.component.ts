@@ -14,7 +14,7 @@ import { IStudent } from 'app/shared/model/student.model';
 import { StudentService } from 'app/entities/student/student.service';
 import { AttachmentUplodeService } from 'app/entities/document/attachment-uplode.service';
 import { AttachmentService } from 'app/entities/attachment/attachment.service';
-import { Attachment } from 'app/shared/model/attachment.model';
+import { Attachment, IAttachment } from 'app/shared/model/attachment.model';
 
 type SelectableEntity = ITag | ICourse | IStudent;
 
@@ -31,6 +31,7 @@ export class DocumentUpdateComponent implements OnInit {
 
   // attachments?: IAttachmentِ[] = [];
   attachments?: Map<string, any>;
+  addedAttachments: IAttachment[] = [];
   editForm = this.fb.group({
     id: [],
     title: [null, [Validators.required]],
@@ -79,8 +80,10 @@ export class DocumentUpdateComponent implements OnInit {
 
       this.courseService.query(fil).subscribe((res: HttpResponse<ICourse[]>) => {
         this.courses = res.body || [];
-        if (this.courses != null) {
-          this.attachmentUploded.sendCourseSymbol(this.courses[0].symbol || '');
+        if (this.courses[0].symbol != null) {
+          // alert("fff>>>>"+this.courses[0].symbol);
+
+          this.attachmentUploded.sendCourseSymbol(this.courses[0].symbol);
         }
       });
 
@@ -129,26 +132,15 @@ export class DocumentUpdateComponent implements OnInit {
       ratingNumber: this.editForm.get(['ratingNumber'])!.value,
       view: this.editForm.get(['view'])!.value,
       tags: this.editForm.get(['tags'])!.value,
-      courseId: this.editForm.get(['courseId'])!.value,
-      studentId: this.editForm.get(['studentId'])!.value
+      courseId: this.editForm.get(['courseId'])!.value || this.courseId,
+      studentId: this.editForm.get(['studentId'])!.value,
+      attachments: this.getAttachment()
     };
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IDocument>>): void {
     result.subscribe(
-      (doc: HttpResponse<IDocument>) => {
-        this.attachments!.forEach((value: any, key: string) => {
-          this.attachmentService.create({
-            ...new Attachment(),
-            name: key,
-            url: value.url,
-            extension: value.fileType,
-            fileSize: value.fileSize,
-            hits: 0,
-            documentId: doc.body!.id,
-            attachmentTypeId: 1
-          });
-        });
+      () => {
         this.onSaveSuccess();
       },
       () => this.onSaveError()
@@ -177,5 +169,20 @@ export class DocumentUpdateComponent implements OnInit {
       }
     }
     return option;
+  }
+
+  getAttachment(): IAttachment[] {
+    this.attachments!.forEach((value: any, key: string) => {
+      this.addedAttachments.push({
+        ...new Attachment(),
+        name: key,
+        url: value.url,
+        extension: value.fileType,
+        fileSize: value.fileSize,
+        hits: 0,
+        attachmentTypeId: 1
+      });
+    });
+    return this.addedAttachments;
   }
 }
